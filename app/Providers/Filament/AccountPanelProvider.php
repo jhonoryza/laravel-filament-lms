@@ -31,6 +31,8 @@ class AccountPanelProvider extends PanelProvider
             ->plugins([
                 SuitcmsToolkit::make()
             ])
+            ->sidebarWidth('12rem')
+            ->sidebarCollapsibleOnDesktop()
             ->colors([
                 'primary' => Color::Green,
             ])
