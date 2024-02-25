@@ -1,0 +1,83 @@
+models:
+
+  Course:
+    slug: string nullable
+    title: string
+    type: string
+    is_premium: bool
+    price: unsigned big integer
+    discount: unsigned big integer
+    description: string nullable
+    published_at: datetime nullable
+    relationships:
+      BelongsToMany: Technology, MyCourse
+      HasMany: ModuleSection
+
+  ModuleSection:
+    title: string
+    order: unsigned integer
+    course_id: unsigned big integer
+    relationships:
+      BelongsTo: Course
+      HasMany: Module
+
+  Module:
+    module_section_id: unsigned big integer
+    title: string
+    order: unsigned integer
+    content: text
+    relationships:
+      BelongsTo: ModuleSection
+      BelongsToMany: MyModule
+
+  MyCourse:
+    admin_id: unsigned big integer
+    course_id: unsigned big integer
+    is_completed: bool
+    relationships:
+      BelongsToMany: Course, Admin
+      HasMany: MyCourseModule
+
+  MyCourseModule:
+    my_course_id: unsigned big integer
+    module_id: unsigned big integer
+    is_completed: bool
+    relationships:
+      BelongsTo: Module, MyCourse
+
+  Cart:
+    admin_id: unsigned big integer nullable
+    session_id: string nullable
+    data: json
+    relationships:
+      BelongsTo: Admin
+
+  Transaction:
+    admin_id: unsigned big integer
+    status: string
+    number: string
+    total: unsigned big integer
+    course: json
+    snap_token: string:45 nullable
+    payment_method: string:45 nullable
+    payment_status: string:45 nullable
+    pending_at: datetime nullable
+    expired_at: datetime nullable
+    failed_at: datetime nullable
+    success_at: datetime nullable
+    relationships:
+      HasMany: TransactionItem
+      BelongsTo: Admin
+
+  TransactionItem:
+    transaction_id: unsigned big integer
+    course_id: unsigned big integer
+    quantity: unsigned big integer
+    total: unsigned big integer
+    relationships:
+      BelongsTo: Transaction, Course
+
+  Technology:
+    name: string
+    relationships:
+      BelongsToMany: Course
