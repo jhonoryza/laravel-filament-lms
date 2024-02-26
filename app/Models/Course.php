@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Course extends Model
 {
@@ -39,7 +40,7 @@ class Course extends Model
 
     public function technologies(): BelongsToMany
     {
-        return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany(Technology::class, 'course_technologies');
     }
 
     public function admins(): BelongsToMany
@@ -54,5 +55,13 @@ class Course extends Model
     public function moduleSections(): HasMany
     {
         return $this->hasMany(ModuleSection::class);
+    }
+
+    public function modules(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Module::class,
+            ModuleSection::class
+        );
     }
 }

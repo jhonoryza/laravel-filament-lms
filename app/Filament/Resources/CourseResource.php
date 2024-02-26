@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Enum\CourseType;
 use App\Filament\Resources\CourseResource\Pages;
+use App\Filament\Resources\CourseResource\RelationManagers\ModuleSectionsRelationManager;
+use App\Filament\Resources\CourseResource\RelationManagers\ModulesRelationManager;
+use App\Filament\Resources\CourseResource\RelationManagers\TechnologiesRelationManager;
 use App\Models\Course;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,9 +19,13 @@ class CourseResource extends Resource
 {
     protected static ?string $model = Course::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Learning';
 
-        public static function form(Form $form): Form
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -67,7 +74,15 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_premium')
                     ->label('Premium course')
-                    ->getStateUsing(fn (Course $record): string => $record->is_premium ? 'Yes' : 'No')
+                    ->getStateUsing(fn(Course $record): string => $record->is_premium ? 'Yes' : 'No')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('modules_count')
+                    ->label('Modules')
+                    ->counts('modules')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('module_sections_count')
+                    ->label('Sections')
+                    ->counts('moduleSections')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
@@ -85,7 +100,6 @@ class CourseResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -100,6 +114,17 @@ class CourseResource extends Resource
     {
         return [
             'index' => Pages\ManageCourses::route('/'),
+            'edit' => Pages\EditCoursePage::route('/edit/{record}'),
         ];
     }
+
+    public static function getRelations(): array
+    {
+        return [
+            ModuleSectionsRelationManager::class,
+            ModulesRelationManager::class,
+            TechnologiesRelationManager::class,
+        ];
+    }
+
 }

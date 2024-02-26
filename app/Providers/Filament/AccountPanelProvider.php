@@ -33,6 +33,7 @@ class AccountPanelProvider extends PanelProvider
             ])
             ->sidebarWidth('12rem')
             ->sidebarCollapsibleOnDesktop()
+            ->font(family: 'Figtree')
             ->colors([
                 'primary' => Color::Green,
             ])
