@@ -39,10 +39,10 @@ class MyCoursePanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/MyCourse/Pages'), for: 'App\\Filament\\MyCourse\\Pages')
             ->discoverWidgets(in: app_path('Filament/MyCourse/Widgets'), for: 'App\\Filament\\MyCourse\\Widgets')
             ->pages([
-                Module::class
+                Module::class,
             ])
             ->navigation(function (NavigationBuilder $builder, Request $request): NavigationBuilder {
-                $courseSlug = $request->route()->parameter('course');
+                $courseSlug     = $request->route()->parameter('course');
                 $moduleSections = ModuleSection::query()
                     ->whereHas('course', fn ($query) => $query->where('slug', $courseSlug))
                     ->get();
@@ -50,22 +50,26 @@ class MyCoursePanelProvider extends PanelProvider
                 $navs = [];
 
                 $navMyCourse = NavigationItem::make('Back')
-                            ->url(route('filament.account.resources.courses.index'));
+                    ->icon('heroicon-o-arrow-uturn-left')
+                    ->url(route('filament.account.resources.courses.index'));
 
                 foreach ($moduleSections as $moduleSection) {
                     $nav = NavigationGroup::make($moduleSection->title)
-                            ->label(ucwords($moduleSection->title))
-                            ->icon('heroicon-o-document-text')
-                            ->items(
-                                $moduleSection->modules->map(function ($item) use ($courseSlug) {
-                                    return NavigationItem::make($item->title)
-                                        ->label(ucwords($item->title))
-                                        ->url(route("filament.my-course.pages.module", [
-                                            'course' => $courseSlug,
-                                            'module' => $item->id
-                                        ]));
-                                })->toArray()
-                            );
+                        ->label(ucwords($moduleSection->title))
+                        ->icon('heroicon-o-document-text')
+                        ->items(
+                            $moduleSection->modules->map(function ($item) use ($courseSlug, $request) {
+                                $module = $request->route()->parameter('module');
+
+                                return NavigationItem::make($item->title)
+                                    ->label(ucwords($item->title))
+                                    ->isActiveWhen(fn () => $item->id === $module->id)
+                                    ->url(route('filament.my-course.pages.module', [
+                                        'course' => $courseSlug,
+                                        'module' => $item->id,
+                                    ]));
+                            })->toArray()
+                        );
                     $navs[] = $nav;
                 }
 

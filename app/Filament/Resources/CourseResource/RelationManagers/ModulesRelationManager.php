@@ -69,8 +69,7 @@ class ModulesRelationManager extends RelationManager
                         'strike',
                         'table',
                         'undo',
-                    ])
-                ,
+                    ]),
             ]);
     }
 
@@ -91,13 +90,13 @@ class ModulesRelationManager extends RelationManager
                 Tables\Actions\Action::make('create-module-section')
                     ->color(Color::Lime)
                     ->label('New Module Section')
-                    ->form(fn(RelationManager $livewire) => ModuleSection::forms($livewire->getOwnerRecord()->id))
+                    ->form(fn (RelationManager $livewire) => ModuleSection::forms($livewire->getOwnerRecord()->id))
                     ->mutateFormDataUsing(function (array $data, RelationManager $livewire) {
                         return ModuleSection::query()->create([
                             ...$data,
                             ...['course_id' => $livewire->getOwnerRecord()->id],
                         ])->toArray();
-                    })
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

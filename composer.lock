@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8567afead38be1dfada06e670845624",
+    "content-hash": "1f218966d34781017f27c7eaadd2a65d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2264,11 +2264,17 @@
         },
         {
             "name": "jhonoryza/filament-suitcms",
-            "version": "dev-main",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jhonoryza/filament-suitcms-plugin.git",
+                "reference": "f7973438e04b71a47d2fa0604bde1db31df71531"
+            },
             "dist": {
-                "type": "path",
-                "url": "../filament-suitcms-plugin",
-                "reference": "91b80281f80121088d3bb8f6d411589b3583517a"
+                "type": "zip",
+                "url": "https://api.github.com/repos/jhonoryza/filament-suitcms-plugin/zipball/f7973438e04b71a47d2fa0604bde1db31df71531",
+                "reference": "f7973438e04b71a47d2fa0604bde1db31df71531",
+                "shasum": ""
             },
             "require": {
                 "filament/filament": "^3.1",
@@ -2300,6 +2306,7 @@
                     "Fajar\\Filament\\Suitcms\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2310,9 +2317,11 @@
                 }
             ],
             "description": "suitcms filament panel plugin",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/jhonoryza/filament-suitcms-plugin/issues",
+                "source": "https://github.com/jhonoryza/filament-suitcms-plugin/tree/1.1.0"
+            },
+            "time": "2024-03-20T09:01:46+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -11950,9 +11959,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "jhonoryza/filament-suitcms": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -30,7 +30,7 @@ class ModuleSection extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'        => 'integer',
         'course_id' => 'integer',
     ];
 
@@ -56,7 +56,7 @@ class ModuleSection extends Model
             TextInput::make('order')
                 ->numeric()
                 ->default(0)
-                ->required()
+                ->required(),
         ];
     }
 }

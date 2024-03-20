@@ -29,9 +29,9 @@ class TransactionItem extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'             => 'integer',
         'transaction_id' => 'integer',
-        'course_id' => 'integer',
+        'course_id'      => 'integer',
     ];
 
     public function transaction(): BelongsTo

@@ -24,18 +24,18 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'admin_id' => Admin::factory(),
-            'status' => $this->faker->randomElement(TransactionStatus::toArray()),
-            'number' => $this->faker->word(),
-            'total' => $this->faker->randomNumber(),
-            'course' => '{}',
-            'snap_token' => $this->faker->regexify('[A-Za-z0-9]{45}'),
+            'admin_id'       => Admin::factory(),
+            'status'         => $this->faker->randomElement(TransactionStatus::toArray()),
+            'number'         => $this->faker->word(),
+            'total'          => $this->faker->randomNumber(),
+            'course'         => '{}',
+            'snap_token'     => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'payment_method' => $this->faker->randomElement(PaymentMethod::toArray()),
             'payment_status' => $this->faker->randomElement(MidtransPaymentStatus::toArray()),
-            'pending_at' => $this->faker->dateTime(),
-            'expired_at' => $this->faker->dateTime(),
-            'failed_at' => $this->faker->dateTime(),
-            'success_at' => $this->faker->dateTime(),
+            'pending_at'     => $this->faker->dateTime(),
+            'expired_at'     => $this->faker->dateTime(),
+            'failed_at'      => $this->faker->dateTime(),
+            'success_at'     => $this->faker->dateTime(),
         ];
     }
 }

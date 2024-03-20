@@ -4,13 +4,13 @@ namespace App\Enum;
 
 enum MidtransPaymentStatus: string
 {
-    case SUCCESS = 'success';
-    case CAPTURE = 'capture';
+    case SUCCESS    = 'success';
+    case CAPTURE    = 'capture';
     case SETTLEMENT = 'settlement';
-    case PENDING = 'pending';
-    case CANCEL = 'cancel';
-    case EXPIRED = 'expired';
-    case EXPIRE = 'expire';
+    case PENDING    = 'pending';
+    case CANCEL     = 'cancel';
+    case EXPIRED    = 'expired';
+    case EXPIRE     = 'expire';
 
     public function isSuccess(): bool
     {

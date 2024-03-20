@@ -14,6 +14,6 @@ enum CourseType: string
 
     public static function options(): array
     {
-        return collect(self::toArray())->mapWithKeys(fn($type) => [$type => ucwords($type)])->toArray();
+        return collect(self::toArray())->mapWithKeys(fn ($type) => [$type => ucwords($type)])->toArray();
     }
 }

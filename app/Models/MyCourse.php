@@ -19,7 +19,7 @@ class MyCourse extends Model
         'admin_id',
         'course_id',
         'is_completed',
-        'completed_modules'
+        'completed_modules',
     ];
 
     /**

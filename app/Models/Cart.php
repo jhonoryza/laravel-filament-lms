@@ -27,9 +27,9 @@ class Cart extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'       => 'integer',
         'admin_id' => 'integer',
-        'data' => 'array',
+        'data'     => 'array',
     ];
 
     public function admin(): BelongsTo

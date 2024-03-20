@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Admin;
 use App\Models\Cart;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartFactory extends Factory
 {
@@ -22,9 +21,9 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'admin_id' => Admin::factory(),
+            'admin_id'   => Admin::factory(),
             'session_id' => $this->faker->word(),
-            'data' => '{}',
+            'data'       => '{}',
         ];
     }
 }

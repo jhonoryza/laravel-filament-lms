@@ -28,7 +28,7 @@ class Module extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'                => 'integer',
         'module_section_id' => 'integer',
     ];
 
@@ -36,5 +36,4 @@ class Module extends Model
     {
         return $this->belongsTo(ModuleSection::class);
     }
-
 }

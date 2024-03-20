@@ -24,7 +24,7 @@ class CourseResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     public static function form(Form $form): Form
     {
@@ -75,7 +75,7 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_premium')
                     ->label('Premium course')
-                    ->getStateUsing(fn(Course $record): string => $record->is_premium ? 'Yes' : 'No')
+                    ->getStateUsing(fn (Course $record): string => $record->is_premium ? 'Yes' : 'No')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('modules_count')
                     ->label('Modules')
@@ -104,11 +104,11 @@ class CourseResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ViewAction::make()
-                    ->url(fn($record) => route("filament.my-course.pages.module", [
+                    ->url(fn ($record) => route('filament.my-course.pages.module', [
                         'course' => $record->slug,
-                        'module' => $record->modules->first()->id
+                        'module' => $record->modules->first()->id,
                     ]))
-                    ->hidden(fn($record) => !$record->modules->count()),
+                    ->hidden(fn ($record) => ! $record->modules->count()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -116,11 +116,13 @@ class CourseResource extends Resource
                 ]),
             ])
             ->modifyQueryUsing(function (Builder $query) {
-                dd(auth('cms')->user());
-                $query->when(
-                    !auth('cms')->user()->isSuperAdmin(),
-                    fn($query) => $query->where('is_premium', 0)
-                );
+                $query
+                    ->when(
+                        ! auth('cms')->user()->isSuperAdmin(),
+                        fn ($query) => $query->whereHas('modules', function (Builder $query) {
+                            $query->groupBy('modules.id')->havingRaw('COUNT(*) > 0');
+                        })
+                    );
             });
     }
 
@@ -128,7 +130,7 @@ class CourseResource extends Resource
     {
         return [
             'index' => Pages\ManageCourses::route('/'),
-            'edit' => Pages\EditCoursePage::route('/edit/{record}'),
+            'edit'  => Pages\EditCoursePage::route('/edit/{record}'),
         ];
     }
 
@@ -140,5 +142,4 @@ class CourseResource extends Resource
             TechnologiesRelationManager::class,
         ];
     }
-
 }

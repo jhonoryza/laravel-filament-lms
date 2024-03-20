@@ -23,10 +23,10 @@ class TransactionItemFactory extends Factory
     {
         return [
             'transaction_id' => Transaction::factory(),
-            'course_id' => Course::factory(),
-            'price' => $this->faker->randomNumber(),
-            'quantity' => $this->faker->randomNumber(),
-            'total' => $this->faker->randomNumber(),
+            'course_id'      => Course::factory(),
+            'price'          => $this->faker->randomNumber(),
+            'quantity'       => $this->faker->randomNumber(),
+            'total'          => $this->faker->randomNumber(),
         ];
     }
 }

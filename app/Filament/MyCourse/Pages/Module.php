@@ -18,7 +18,7 @@ class Module extends Page
     public function mount(): void
     {
         /** @var Model $model */
-        $model = Route::current()->parameter('module');
+        $model       = Route::current()->parameter('module');
         $this->model = $model;
     }
 
@@ -35,7 +35,7 @@ class Module extends Page
     public function getHeaderWidgets(): array
     {
         return [
-//            StatsOverview::class
+            //            StatsOverview::class
         ];
     }
 }

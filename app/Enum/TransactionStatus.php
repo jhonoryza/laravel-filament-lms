@@ -7,7 +7,7 @@ enum TransactionStatus: string
     case SUCCESS = 'success';
     case PENDING = 'pending';
     case EXPIRED = 'expired';
-    case FAILED = 'failed';
+    case FAILED  = 'failed';
 
     public static function toArray(): array
     {

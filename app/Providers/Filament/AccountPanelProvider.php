@@ -2,11 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Dashboard;
 use Fajar\Filament\Suitcms\SuitcmsToolkit;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -29,7 +29,7 @@ class AccountPanelProvider extends PanelProvider
             ->path('account')
             ->login()
             ->plugins([
-                SuitcmsToolkit::make()
+                SuitcmsToolkit::make(),
             ])
             ->sidebarWidth('12rem')
             ->sidebarCollapsibleOnDesktop()
@@ -40,7 +40,7 @@ class AccountPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([

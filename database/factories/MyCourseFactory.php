@@ -22,10 +22,10 @@ class MyCourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'admin_id' => Admin::factory(),
-            'course_id' => Course::factory(),
-            'is_completed' => $this->faker->boolean,
-            'completed_modules' => null
+            'admin_id'          => Admin::factory(),
+            'course_id'         => Course::factory(),
+            'is_completed'      => $this->faker->boolean,
+            'completed_modules' => null,
         ];
     }
 }

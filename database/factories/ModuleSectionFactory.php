@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Course;
 use App\Models\ModuleSection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ModuleSectionFactory extends Factory
 {
@@ -22,8 +21,8 @@ class ModuleSectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(4),
-            'order' => $this->faker->randomNumber(),
+            'title'     => $this->faker->sentence(4),
+            'order'     => $this->faker->randomNumber(),
             'course_id' => Course::factory(),
         ];
     }

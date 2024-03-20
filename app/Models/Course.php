@@ -34,7 +34,7 @@ class Course extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'           => 'integer',
         'published_at' => 'datetime',
     ];
 
@@ -48,7 +48,7 @@ class Course extends Model
         return $this->belongsToMany(Admin::class, 'my_courses')
             ->withPivot([
                 'is_completed',
-                'completed_modules'
+                'completed_modules',
             ]);
     }
 

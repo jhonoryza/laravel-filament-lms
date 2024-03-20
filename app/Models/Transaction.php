@@ -37,12 +37,12 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'admin_id' => 'integer',
-        'course' => 'array',
+        'id'         => 'integer',
+        'admin_id'   => 'integer',
+        'course'     => 'array',
         'pending_at' => 'datetime',
         'expired_at' => 'datetime',
-        'failed_at' => 'datetime',
+        'failed_at'  => 'datetime',
         'success_at' => 'datetime',
     ];
 
