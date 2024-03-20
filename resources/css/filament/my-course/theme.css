@@ -1,0 +1,32 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+@layer base
+{
+    h1 {
+        @apply text-3xl;
+        @apply mb-8;
+    }
+    h2 {
+        @apply text-2xl;
+        @apply my-8;
+    }
+    p {
+        @apply my-2;
+    }
+    pre {
+        @apply p-2;
+        @apply my-4;
+        @apply overflow-x-auto;
+        @apply rounded-xl;
+        @apply shadow-xl;
+    }
+    img {
+        @apply my-4;
+        @apply h-64 sm:h-96;
+        @apply rounded-xl;
+        @apply shadow-xl;
+        @apply overflow-x-auto;
+    }
+}

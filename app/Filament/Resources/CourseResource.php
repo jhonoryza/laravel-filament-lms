@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 class CourseResource extends Resource
@@ -102,12 +103,25 @@ class CourseResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->url(fn($record) => route("filament.my-course.pages.module", [
+                        'course' => $record->slug,
+                        'module' => $record->modules->first()->id
+                    ]))
+                    ->hidden(fn($record) => !$record->modules->count()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                dd(auth('cms')->user());
+                $query->when(
+                    !auth('cms')->user()->isSuperAdmin(),
+                    fn($query) => $query->where('is_premium', 0)
+                );
+            });
     }
 
     public static function getPages(): array

@@ -3,6 +3,6 @@
 return [
     'cms' => [
         'driver' => 'eloquent',
-        'model' => Fajar\Filament\Suitcms\Models\Admin::class,
+        'model' => App\Models\Admin::class,
     ],
 ];
