@@ -4,7 +4,7 @@ models:
     slug: string nullable
     title: string
     type: string
-    is_premium: bool
+    is_premium: boolean
     price: unsigned big integer
     discount: unsigned big integer
     description: string nullable
@@ -33,17 +33,11 @@ models:
   MyCourse:
     admin_id: unsigned big integer
     course_id: unsigned big integer
-    is_completed: bool
+    is_completed: boolean
+    completed_modules: json
     relationships:
       BelongsToMany: Course, Admin
       HasMany: MyCourseModule
-
-  MyCourseModule:
-    my_course_id: unsigned big integer
-    module_id: unsigned big integer
-    is_completed: bool
-    relationships:
-      BelongsTo: Module, MyCourse
 
   Cart:
     admin_id: unsigned big integer nullable
